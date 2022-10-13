@@ -20,7 +20,7 @@ spicetify apply
 ```
 
 ## Usage
-Simply open the lyrics for a Japanese Song and Romaji Lyrics will convert the songtext within a few seconds.
+Simply open the lyrics for a Japanese Song and Romaji Lyrics will convert the songtext within seconds.
 
 Control options are planned in future updates.
 
