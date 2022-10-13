@@ -3,6 +3,11 @@
 * Auto detects Japanese lyrics and translates them to Romaji using the included dictionary
 * Support for Furigana and multi view modes planned.
 
+```diff
+! DUE TO THE LARGE FILESIZE THE INSTALLATION VIA MARKETPLACE DOES NOT SEEM TO WORK.
+Install manually by following the steps listed below.
+```
+
 ## ⚙️ Install
 Copy `romaji_lyrics.js` into your [Spicetify](https://github.com/spicetify/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                               |
@@ -18,9 +23,15 @@ spicetify apply
 ```
 
 ## Usage
-Simply open the lyrics for a Japanese Song and Romaji Lyrics will convert the songtext within a few seconds.
+Simply open the lyrics for a Japanese Song and Romaji Lyrics will convert the songtext within seconds.
 
 Control options are planned in future updates.
+
+## Credit
+
+[Romaji Lyrics](https://github.com/41pha1/spicetify-romaji-lyrics) uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. 
+
+Be sure to give him some love as well!
 
 ##  More
 🌟 Like it? Gimme some love!    
