@@ -24,6 +24,10 @@ Simply open the lyrics for a Japanese Song and Romaji Lyrics will convert the so
 
 Control options are planned in future updates.
 
+## Credit
+
+Romaji Lyrics uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. Be sure to give him some love as well!
+
 ##  More
 🌟 Like it? Gimme some love!    
 [![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-romaji-lyrics?logo=github&style=social)](https://github.com/41pha1/spicetify-romaji-lyrics/)
