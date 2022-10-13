@@ -29,7 +29,7 @@ Control options are planned in future updates.
 
 ## Credit
 
-Romaji Lyrics uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. 
+[Romaji Lyrics](https://github.com/41pha1/spicetify-romaji-lyrics) uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. 
 
 Be sure to give him some love as well!
 
