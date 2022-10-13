@@ -1,1 +1,1 @@
-"# spicetify-romaji-lyrics" 
+# spicetify-romaji-lyrics
