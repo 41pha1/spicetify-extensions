@@ -24,13 +24,13 @@ Control options are planned in future updates.
 
 ## Credit
 
-[Romaja Lyrics](https://github.com/41pha1/spicetify-romaja-lyrics) uses a modified version of [fujaru's](https://github.com/fujaru) [aromanize-js](https://github.com/fujaru/aromanize-js) Korean transliteration utility to convert the lyrics client side. 
+[Romaja Lyrics](https://github.com/41pha1/spicetify-extensions/tree/main/romaja-lyrics) uses a modified version of [fujaru's](https://github.com/fujaru) [aromanize-js](https://github.com/fujaru/aromanize-js) Korean transliteration utility to convert the lyrics client side. 
 
 Be sure to give them some love as well!
 
 ##  More
 🌟 Like it? Gimme some love!    
-[![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-romaja-lyrics?logo=github&style=social)](https://github.com/41pha1/spicetify-romaja-lyrics/)
+[![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-extensions?logo=github&style=social)](https://github.com/41pha1/spicetify-extensions/)
 
-If you find any bugs or have any suggestion for improvement, please [create a new issue](https://github.com/41pha1/spicetify-romaja-lyrics/issues/new/choose) on the GitHub repo.    
-![https://github.com/41pha1/spicetify-romaja-lyrics/issues](https://img.shields.io/github/issues/41pha1/spicetify-romaja-lyrics?logo=github)
+If you find any bugs or have any suggestion for improvement, please [create a new issue](https://github.com/41pha1/spicetify-extensions/issues/new/choose) on the GitHub repo.    
+![https://github.com/41pha1/spicetify-extensions/issues](https://img.shields.io/github/issues/41pha1/spicetify-extensions?logo=github)
