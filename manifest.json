@@ -1,6 +1,6 @@
 [
     {
-      "name": "Romaji Lyrics",
+      "name": "Japanese Romaji Lyrics",
       "description": "Spicetify extension to convert Japanese lyrics to Romaji.",
       "preview": "preview.png",
       "main": "marketplace/romaji_lyrics.js",
