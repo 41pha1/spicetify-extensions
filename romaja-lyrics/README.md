@@ -30,7 +30,7 @@ Be sure to give them some love as well!
 
 ##  More
 🌟 Like it? Gimme some love!    
-[![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-romaja-lyrics?logo=github&style=social)](https://github.com/41pha1/spicetify-romaja-lyrics/)
+[![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-extensions?logo=github&style=social)](https://github.com/41pha1/spicetify-extensions/)
 
-If you find any bugs or have any suggestion for improvement, please [create a new issue](https://github.com/41pha1/spicetify-romaja-lyrics/issues/new/choose) on the GitHub repo.    
-![https://github.com/41pha1/spicetify-romaja-lyrics/issues](https://img.shields.io/github/issues/41pha1/spicetify-romaja-lyrics?logo=github)
+If you find any bugs or have any suggestion for improvement, please [create a new issue](https://github.com/41pha1/spicetify-extensions/issues/new/choose) on the GitHub repo.    
+![https://github.com/41pha1/spicetify-extensions/issues](https://img.shields.io/github/issues/41pha1/spicetify-extensions?logo=github)
