@@ -24,7 +24,7 @@ Control options are planned in future updates.
 
 ## Credit
 
-[Romaja Lyrics](https://github.com/41pha1/spicetify-romaja-lyrics) uses a modified version of [fujaru's](https://github.com/fujaru) [aromanize-js](https://github.com/fujaru/aromanize-js) Korean transliteration utility to convert the lyrics client side. 
+[Romaja Lyrics](https://github.com/41pha1/spicetify-extensions/tree/main/romaja-lyrics) uses a modified version of [fujaru's](https://github.com/fujaru) [aromanize-js](https://github.com/fujaru/aromanize-js) Korean transliteration utility to convert the lyrics client side. 
 
 Be sure to give them some love as well!
 
