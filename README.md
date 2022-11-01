@@ -3,12 +3,10 @@
 * Auto detects Japanese lyrics and translates them to Romaji using the included dictionary
 * Support for Furigana and multi view modes planned.
 
-```diff
-! DUE TO THE LARGE FILESIZE THE INSTALLATION VIA MARKETPLACE DOES NOT SEEM TO WORK.
-Install manually by following the steps listed below.
-```
+# IMPORTANT!
+Due to the large included dictionary this extensions takes up to a few minutes to load after first installing it from the marketplace.
 
-## ⚙️ Install
+## ⚙️ Install Manually (Recommended for performance)
 Copy `romaji_lyrics.js` into your [Spicetify](https://github.com/spicetify/spicetify-cli) extensions directory:
 | **Platform** | **Path**                                                                               |
 |------------|------------------------------------------------------------------------------------------|
