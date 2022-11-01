@@ -1,6 +1,6 @@
 # Spicetify Romaji Lyrics
 [Spicetify](https://github.com/spicetify/spicetify-cli) extension to convert Japanese lyrics to Romaji. 
-* Auto detects Japanese lyrics and translates them to Romaji using the included dictionary
+* Auto detects Japanese lyrics and converts them to Romaji using the included dictionary
 * Support for Furigana and multi view modes planned.
 
 # IMPORTANT!
@@ -29,7 +29,7 @@ Control options are planned in future updates.
 
 [Romaji Lyrics](https://github.com/41pha1/spicetify-romaji-lyrics) uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. 
 
-Be sure to give him some love as well!
+Be sure to give them some love as well!
 
 ##  More
 🌟 Like it? Gimme some love!    
