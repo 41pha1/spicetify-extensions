@@ -6050,7 +6050,7 @@
 const dict1_url = "https://cdn.jsdelivr.net/gh/spicetify/spicetify-lyrics-romaji@main/dictionary/split_1.js";
 const dict2_url = "https://cdn.jsdelivr.net/gh/spicetify/spicetify-lyrics-romaji@main/dictionary/split_2.js";
 
-class Translator {
+class Japanese_Translator {
     constructor() {
         this.kuroshiro = new Kuroshiro.default();
         this.missingdicts = true;
@@ -6087,7 +6087,7 @@ class Translator {
         node.appendChild(s);
     }
 
-    async romajifyText(text, target = "romaji", mode = "spaced") {
+    async romanize(text, target = "romaji", mode = "spaced") {
         if (!this.finished) {
             setTimeout(this.romajifyText.bind(this), 100, text, target, mode);
             return;
@@ -6100,53 +6100,82 @@ class Translator {
     }
 }
 
-const translator = new Translator();
-var translated_lyrics = null;
+class Romaji_Lyrics
+{
+    static translator = new Japanese_Translator();
+    static translated_lyrics = null;
+    static original_lyrics = null;
+    static enabled = true;
+    static mode = "romaji"
+    static target = "spaced";
+
+    static eventLoop()
+    {
+        const currentLyrics = this.getLyrics();
+        
+        if(!this.original_lyrics || !(currentLyrics == this.translated_lyrics)){
+            this.original_lyrics = currentLyrics;
+            this.translateLyrics(this.original_lyrics);
+        }
+    
+        setTimeout(this.eventLoop.bind(this), 50)
+    }
+
+    static addControlUI()
+    {
+        const trap = new Spicetify.Mousetrap();
+        trap.handleKey = (character, modifiers, e) => {
+			if (e.type == "keydown") {
+				if(character == "tab" && modifiers.includes("ctrl"))
+                {
+                    this.enabled = !this.enabled;
+                    Romaji_Lyrics.translateLyrics(Romaji_Lyrics.original_lyrics);
+                }
+			}
+		};
+    }
+    
+    static getLyrics() 
+    {
+        if (!this.translator.finished) return null;
+    
+        const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
+        if(!lyrics_div) return null;
+    
+        var lyrics = "";
+        for (let lyric_div of lyrics_div) lyrics += lyric_div.innerHTML + "\n";
+        return lyrics;
+    }
+    
+    static translateLyrics(lyrics) {
+        if(!this.translator.finished || !this.isJapanese(lyrics)) return;
+
+        if(!this.enabled){
+            this.translated_lyrics = this.original_lyrics;
+            Romaji_Lyrics.applyTranslation();
+            return;
+        }
+    
+        this.translator.romanize(lyrics, this.mode, this.target).then((r) => {Romaji_Lyrics.translated_lyrics = r; Romaji_Lyrics.applyTranslation()});
+    }
+    
+    static applyTranslation()
+    {
+        const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
+        if(!lyrics_div || !this.translated_lyrics) return;
+    
+        var lyrics_array = this.translated_lyrics.split("\n");
+        for (var j = 0; j < lyrics_div.length; j++) lyrics_div[j].innerHTML = lyrics_array[j];
+    }
+    
+    static isJapanese(f) {
+        return /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B/g.test(f);
+    }
+}
+
 
 (function romaji_lyrics() {
-    eventLoop();
+    new Romaji_Lyrics();
+    Romaji_Lyrics.addControlUI();
+    Romaji_Lyrics.eventLoop();
 })();
-
-function eventLoop()
-{
-    const lyrics = getLyrics();
-
-    if(lyrics && lyrics != translated_lyrics)
-        translateLyrics(lyrics);
-
-    setTimeout(eventLoop, 50);
-}
-
-function getLyrics() 
-{
-    const lyrics_button = document.querySelector(".Button-sc-1dqy6lx-0");
-    if (!lyrics_button || !lyrics_button.classList.contains("control-button--active")) return null;
-
-    const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
-    if(!lyrics_div) return null;
-
-    var lyrics = "";
-    for (let lyric_div of lyrics_div) lyrics += lyric_div.innerHTML + "\n";
-    return lyrics;
-}
-
-function translateLyrics(lyrics) {
-    if(!translator.finished || !isJapanese(lyrics)) return;
-
-    console.log("Translating...");
-
-    translator.romajifyText(lyrics, "romaji", "spaced").then((r) => {translated_lyrics = r; applyTranslation()});
-}
-
-function applyTranslation()
-{
-    const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
-    if(!lyrics_div) return;
-
-    var lyrics_array = translated_lyrics.split("\n");
-    for (var j = 0; j < lyrics_div.length; j++) lyrics_div[j].innerHTML = lyrics_array[j]
-}
-
-function isJapanese(f) {
-    return /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B/g.test(f);
-}
