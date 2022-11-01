@@ -27,9 +27,6 @@ class Romaja_Lyrics
     
     static getLyrics() 
     {
-        const lyrics_button = document.querySelector(".Button-sc-1dqy6lx-0");
-        if (!lyrics_button || !lyrics_button.classList.contains("control-button--active")) return null;
-    
         const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
         if(!lyrics_div) return null;
     
