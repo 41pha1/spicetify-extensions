@@ -27,13 +27,13 @@ Control options are planned in future updates.
 
 ## Credit
 
-[Romaji Lyrics](https://github.com/41pha1/spicetify-romaji-lyrics) uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. 
+[Romaji Lyrics](https://github.com/41pha1/spicetify-extensions/romaji-lyrics) uses a modified version of [hexenq's](https://github.com/hexenq) [Kuroshiro](https://github.com/hexenq/kuroshiro) javascript language library to convert the lyrics client side. 
 
 Be sure to give them some love as well!
 
 ##  More
 🌟 Like it? Gimme some love!    
-[![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-romaji-lyrics?logo=github&style=social)](https://github.com/41pha1/spicetify-romaji-lyrics/)
+[![Github Stars badge](https://img.shields.io/github/stars/41pha1/spicetify-extensions?logo=github&style=social)](https://github.com/41pha1/spicetify-extensions/)
 
-If you find any bugs or have any suggestion for improvement, please [create a new issue](https://github.com/41pha1/spicetify-romaji-lyrics/issues/new/choose) on the GitHub repo.    
-![https://github.com/41pha1/spicetify-romaji-lyrics/issues](https://img.shields.io/github/issues/41pha1/spicetify-romaji-lyrics?logo=github)
+If you find any bugs or have any suggestion for improvement, please [create a new issue](https://github.com/41pha1/spicetify-extensions/issues/new/choose) on the GitHub repo.    
+![https://github.com/41pha1/spicetify-romaji-lyrics/issues](https://img.shields.io/github/issues/41pha1/spicetify-extensions?logo=github)
