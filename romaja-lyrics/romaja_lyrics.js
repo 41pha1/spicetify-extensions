@@ -12,22 +12,44 @@ class Korean_Translator {
 
 class Romaja_Lyrics
 {
+    static LYRIC_DIV_SELECTOR = "div.lyrics-lyricsContent-lyric";
     static translator = new Korean_Translator();
     static translated_lyrics = null;
+    static original_lyrics = null;
+    static enabled = true;
+    static mode = "romaji"
+    static target = "spaced";
 
     static eventLoop()
     {
-        const lyrics = this.getLyrics();
-    
-        if(lyrics && lyrics != this.translated_lyrics)
-        this.translateLyrics(lyrics);
+        const currentLyrics = this.getLyrics();
+        
+        if(currentLyrics && !this.original_lyrics || !(currentLyrics == this.translated_lyrics)){
+            this.original_lyrics = currentLyrics;
+            this.translateLyrics(this.original_lyrics);
+        }
     
         setTimeout(this.eventLoop.bind(this), 50)
+    }
+
+    static addControlUI()
+    {
+        const trap = new Spicetify.Mousetrap();
+        trap.handleKey = (character, modifiers, e) => {
+			if (e.type == "keydown") {
+				if(character == "tab" && modifiers.includes("ctrl"))
+                {
+                    this.enabled = !this.enabled;
+                    Romaja_Lyrics.translateLyrics(Romaja_Lyrics.original_lyrics);
+                }
+			}
+		};
     }
     
     static getLyrics() 
     {
-        const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
+        const lyrics_div = document.querySelectorAll(Romaja_Lyrics.LYRIC_DIV_SELECTOR);
+
         if(!lyrics_div) return null;
     
         var lyrics = "";
@@ -35,19 +57,26 @@ class Romaja_Lyrics
         return lyrics;
     }
     
-    static translateLyrics(lyrics) {
+    static translateLyrics(lyrics) 
+    {
         if(!this.isKorean(lyrics)) return;
-    
+
+        if(!this.enabled){
+            this.translated_lyrics = this.original_lyrics;
+            Romaja_Lyrics.applyTranslation();
+            return;
+        }
+        
         this.translator.romanize(lyrics).then((r) => {Romaja_Lyrics.translated_lyrics = r; Romaja_Lyrics.applyTranslation()});
     }
     
     static applyTranslation()
     {
-        const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
+        const lyrics_div = document.querySelectorAll(Romaja_Lyrics.LYRIC_DIV_SELECTOR);
         if(!lyrics_div || !this.translated_lyrics) return;
     
         var lyrics_array = this.translated_lyrics.split("\n");
-        for (var j = 0; j < lyrics_div.length; j++) lyrics_div[j].innerHTML = lyrics_array[j]
+        for (var j = 0; j < lyrics_div.length; j++) lyrics_div[j].innerHTML = lyrics_array[j];
     }
     
     static isKorean(f) {
@@ -57,6 +86,7 @@ class Romaja_Lyrics
 
 (function romaja_lyrics() {
     new Romaja_Lyrics();
+    Romaja_Lyrics.addControlUI();
     Romaja_Lyrics.eventLoop();
 })();
 

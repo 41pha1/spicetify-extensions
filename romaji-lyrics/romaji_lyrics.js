@@ -6102,6 +6102,7 @@ class Japanese_Translator {
 
 class Romaji_Lyrics
 {
+    static LYRIC_DIV_SELECTOR = "div.lyrics-lyricsContent-lyric";
     static translator = new Japanese_Translator();
     static translated_lyrics = null;
     static original_lyrics = null;
@@ -6139,7 +6140,8 @@ class Romaji_Lyrics
     {
         if (!this.translator.finished) return null;
     
-        const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
+        const lyrics_div = document.querySelectorAll(Romaji_Lyrics.LYRIC_DIV_SELECTOR);
+
         if(!lyrics_div) return null;
     
         var lyrics = "";
@@ -6161,7 +6163,7 @@ class Romaji_Lyrics
     
     static applyTranslation()
     {
-        const lyrics_div = document.querySelectorAll("[data-testid=fullscreen-lyric]");
+        const lyrics_div = document.querySelectorAll(Romaji_Lyrics.LYRIC_DIV_SELECTOR);
         if(!lyrics_div || !this.translated_lyrics) return;
     
         var lyrics_array = this.translated_lyrics.split("\n");
