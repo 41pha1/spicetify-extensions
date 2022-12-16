@@ -6144,6 +6144,7 @@ class Romaji_Lyrics
     
         var lyrics = "";
         for (let lyric_div of lyrics_div) lyrics += lyric_div.innerHTML + "\n";
+        lyrics = lyrics.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
         return lyrics;
     }
     
