@@ -1,4 +1,4 @@
-﻿const kuroshiroPath = "https://cdn.jsdelivr.net/npm/kuroshiro@1.2.0/dist/kuroshiro.min.js";
+const kuroshiroPath = "https://cdn.jsdelivr.net/npm/kuroshiro@1.2.0/dist/kuroshiro.min.js";
 const kuromojiPath = "https://cdn.jsdelivr.net/npm/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js";
 
 const dictPath = "https:/cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict";
@@ -116,7 +116,7 @@ class Romaji_Lyrics
         if(!lyrics_div) return null;
     
         var lyrics = "";
-        for (let lyric_div of lyrics_div) lyrics += lyric_div.innerHTML + "\n";
+        for (let lyric_div of lyrics_div) lyrics += lyric_div.textContent + "\n";
         lyrics = lyrics.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
         return lyrics;
     }
@@ -130,7 +130,23 @@ class Romaji_Lyrics
             return;
         }
     
-        this.translator.romanize(lyrics, this.mode, this.target).then((r) => {Romaji_Lyrics.translated_lyrics = r; Romaji_Lyrics.applyTranslation()});
+        this.translator.romanize(lyrics, this.mode, this.target).then((r) => {
+            r = r.split('$ KStartK $');
+            var text = '';
+            for (var i = 0; i < r.length; i++) {
+                var part = r[i];
+                var index = part.indexOf('$ KStopK $');
+                if (index == -1) {
+                    text += part;
+                }
+                else {
+                    text += part.substring(0, index).toUpperCase();
+                    text += part.substring(index + '$ KStopK $'.length);
+                }
+            }
+            Romaji_Lyrics.translated_lyrics = text;
+            Romaji_Lyrics.applyTranslation()
+        });
     }
     
     static applyTranslation()
