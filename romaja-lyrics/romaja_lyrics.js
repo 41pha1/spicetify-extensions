@@ -12,7 +12,7 @@ class Korean_Translator {
 
 class Romaja_Lyrics
 {
-    static LYRIC_DIV_SELECTOR = "div.lyrics-lyricsContent-lyric";
+    static LYRIC_DIV_SELECTOR = ".BXlQFspJp_jq9SKhUSP3";
     static translator = new Korean_Translator();
     static translated_lyrics = null;
     static original_lyrics = null;
@@ -34,7 +34,7 @@ class Romaja_Lyrics
 
     static addControlUI()
     {
-        const trap = new Spicetify.Mousetrap();
+        const trap = new Mousetrap();
         trap.handleKey = (character, modifiers, e) => {
 			if (e.type == "keydown") {
 				if(character == "tab" && modifiers.includes("ctrl"))
