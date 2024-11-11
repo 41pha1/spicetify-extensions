@@ -12,7 +12,7 @@ class Korean_Translator {
 
 class Romaja_Lyrics
 {
-    static LYRIC_DIV_SELECTOR = ".BXlQFspJp_jq9SKhUSP3";
+    static LYRIC_DIV_SELECTOR = ".lyrics-lyricsContent-text";
     static translator = new Korean_Translator();
     static translated_lyrics = null;
     static original_lyrics = null;
