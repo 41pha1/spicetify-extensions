@@ -73,7 +73,7 @@ class JapaneseTranslator {
 
 class Romaji_Lyrics
 {
-    static LYRIC_DIV_SELECTOR = "div.lyrics-lyricsContent-lyric";
+    static LYRIC_DIV_SELECTOR = ".lyrics-lyricsContent-text";
     static translator = new JapaneseTranslator();
     static translated_lyrics = null;
     static original_lyrics = null;
@@ -95,8 +95,8 @@ class Romaji_Lyrics
 
     static addControlUI()
     {
-        const trap = new Spicetify.Mousetrap();
-        trap.handleKey = (character, modifiers, e) => {
+        this.mousetrap = new Mousetrap();
+        this.mousetrap.handleKey = (character, modifiers, e) => {
 			if (e.type == "keydown") {
 				if(character == "tab" && modifiers.includes("ctrl"))
                 {

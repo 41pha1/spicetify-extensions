@@ -73,7 +73,7 @@ class JapaneseTranslator {
 
 class Romaji_Lyrics
 {
-    static LYRIC_DIV_SELECTOR = ".BXlQFspJp_jq9SKhUSP3";
+    static LYRIC_DIV_SELECTOR = ".lyrics-lyricsContent-text";
     static translator = new JapaneseTranslator();
     static translated_lyrics = null;
     static original_lyrics = null;
