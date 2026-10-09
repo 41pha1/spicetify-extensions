@@ -52,7 +52,16 @@ class JapaneseTranslator {
 
 
 class Romaji_Lyrics {
-	static LYRIC_DIV_SELECTOR = ".lyrics-lyricsContent-text";
+	// Spotify renames/hashes these classes between releases, so keep several
+	// candidates plus the more stable data-testid hooks.
+	static LYRIC_DIV_SELECTOR = [
+		".lyrics-lyricsContent-text",
+		".C8vlCbXzAR7qEMsoQG1r",
+		".LFG5utG7LPiCVtel1IZQ",
+		'[data-testid="lyrics-line"]',
+		'[data-testid="lyrics-line-always-visible"]',
+		'[data-testid="lyrics-line-collapsible"]',
+	].join(",");
 	static translator = new JapaneseTranslator();
 	static enabled = true;
 	static mode = "romaji";
@@ -78,7 +87,7 @@ class Romaji_Lyrics {
 		// .romaji-hide is added synchronously in the MutationObserver callback
 		// BEFORE the browser paints, so the Japanese text is never visible.
 		style.textContent = `
-			.lyrics-lyricsContent-text.romaji-hide {
+			:is(${this.LYRIC_DIV_SELECTOR}).romaji-hide {
 				visibility: hidden !important;
 			}
 		`;
@@ -235,9 +244,9 @@ class Romaji_Lyrics {
 
 	static watchForContainer() {
 		const attachToContainer = () => {
-			const container = document.querySelector(
-				".lyrics-lyricsContent-provider, .lyrics-lyrics-contentContainer, .lyrics-lyrics-contentWrapper"
-			);
+			// Container class names change too; lyric lines are matched by
+			// LYRIC_DIV_SELECTOR anyway, so just observe the whole document.
+			const container = document.body;
 			if (container && !container._romajiWatching) {
 				container._romajiWatching = true;
 				this.lyricsObserver.observe(container, {
