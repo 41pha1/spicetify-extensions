@@ -69,6 +69,8 @@ class Romaji_Lyrics {
 
 	// Cache: original Japanese line -> romaji line
 	static lineCache = new Map();
+	// Element -> original markup, so turning the extension off can restore it
+	static originals = new WeakMap();
 	// Track if we're doing initial bulk translation
 	static bulkTranslating = false;
 	// Store the last known lyrics fingerprint to detect song changes
@@ -122,6 +124,23 @@ class Romaji_Lyrics {
 	 * (before the browser paints). If not, hide the element until
 	 * async translation completes.
 	 */
+	static replaceWithRomaji(el, romajiHtml) {
+		if (!this.originals.has(el)) this.originals.set(el, el.innerHTML);
+		el.innerHTML = romajiHtml;
+		el.classList.remove("romaji-hide");
+	}
+
+	// Put the original Japanese text back on every converted line.
+	static restoreOriginals() {
+		for (const div of document.querySelectorAll(this.LYRIC_DIV_SELECTOR)) {
+			if (this.originals.has(div)) {
+				div.innerHTML = this.originals.get(div);
+				this.originals.delete(div);
+			}
+			div.classList.remove("romaji-hide");
+		}
+	}
+
 	static handleElementSync(el) {
 		if (!this.enabled || !this.translator.finished) return;
 
@@ -136,8 +155,7 @@ class Romaji_Lyrics {
 		// This happens in the same microtask as the DOM mutation,
 		// so the browser never paints the Japanese text
 		if (this.lineCache.has(text)) {
-			el.innerHTML = this.lineCache.get(text);
-			el.classList.remove("romaji-hide");
+			this.replaceWithRomaji(el, this.lineCache.get(text));
 			return;
 		}
 
@@ -155,11 +173,16 @@ class Romaji_Lyrics {
 			const processed = this.processKatakanaMarkers(result);
 			this.lineCache.set(originalText, processed);
 
+			// Turned off while translating: leave the original text alone
+			if (!this.enabled) {
+				el.classList.remove("romaji-hide");
+				return;
+			}
+
 			// Only update if the element still has the same original text
 			// (it might have been changed again by Spotify)
 			if (el.textContent === originalText || el.classList.contains("romaji-hide")) {
-				el.innerHTML = processed;
-				el.classList.remove("romaji-hide");
+				this.replaceWithRomaji(el, processed);
 			}
 		} catch (e) {
 			// On error, just show the original
@@ -189,12 +212,14 @@ class Romaji_Lyrics {
 				this.lineCache.set(text, processed);
 			}
 
+			// Turned off while translating: don't apply anything
+			if (!this.enabled) return;
+
 			// Now apply all cached translations at once
 			for (const div of divs) {
 				const text = div.textContent;
 				if (text && this.lineCache.has(text)) {
-					div.innerHTML = this.lineCache.get(text);
-					div.classList.remove("romaji-hide");
+					this.replaceWithRomaji(div, this.lineCache.get(text));
 				}
 			}
 		} finally {
@@ -303,15 +328,12 @@ class Romaji_Lyrics {
 				if (character == "tab" && modifiers.includes("ctrl")) {
 					this.enabled = !this.enabled;
 					this.lineCache.clear();
+					if (!this.enabled) this.restoreOriginals();
 
 					if (this.enabled) {
 						const divs = document.querySelectorAll(this.LYRIC_DIV_SELECTOR);
 						for (const div of divs) this.handleElementSync(div);
 						this.bulkTranslateAll();
-					} else {
-						// Disabled: show original text by reloading lyrics
-						const divs = document.querySelectorAll(this.LYRIC_DIV_SELECTOR);
-						for (const div of divs) div.classList.remove("romaji-hide");
 					}
 
 					Spicetify.showNotification(
